@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package protopack;
+
+import "google/api/annotations.proto";
+option go_package = "todoapp/generated_proto; protopack";
+
+message AddPostRequest {
+  string title = 1;
+  string content = 2;
+}
+
+message AddPostResponse {
+  int32 statusCode = 1;
+}
+
+service ManagePostService {
+  rpc AddPost (AddPostRequest) returns (AddPostResponse) {
+    option (google.api.http) = {
+      post: "/addpost"
+      body: "*"
+    };
+  }
+}
